@@ -5,9 +5,12 @@ def word_check(word):
     czyli slowem które czyta sie tak samo od przodu i od tylu
     '''
 
+    word = word.lower()
+
     if word == word[::-1]:
         print('Czy argument jest palindromem : Prawda')
     else:
         print('Czy argument jest palindromem : gówno prawda')
+    return
 
-word_check('Patka')
+word_check('Kajak')
