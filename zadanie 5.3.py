@@ -28,11 +28,8 @@ class BusinesContact(BaseContact):
     def contact(self):
         print(f'Wybieram nr {self.b_phone} i dzownię do {self.name} {self.surname}')
 
-    @property
-    def label_length(self):
-        return len(self.name) + len(self.surname)
-    
-    
+
+
 def create_contact(card_type, number_of_cards):
     business_cards = []
 
