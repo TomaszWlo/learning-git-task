@@ -1,3 +1,5 @@
+import random
+
 class Movies:
     def __init__(self, title, release_year, genre, nov):
         self.title = title
@@ -19,22 +21,39 @@ class Series(Movies):
         super().__init__(*args, **kwargs)
         self.episode_nmb = episode_nmb
         self.sezon_nmb = sezon_nmb
-        self.vievs = 0
-    
-    def play(self, views=1):
-        self.vievs += views
 
     def __str__(self):
         return f'{self.title} S{self.sezon_nmb}E{self.episode_nmb}'
     
     
 def get_movies():
-    for item in movies_sorted:
-     print(item.title)
+    movies = [item for item in data if type(item) == Movies]
+    return sorted(movies, key=lambda movie: movie.title)
 
 def get_series():
-    for item in series_sorted:
-        print(item.title)
+    series = [item for item in data if type(item) == Series]
+    return sorted(series, key=lambda serie: serie.title)
+
+def search(title):
+    for item in data:
+        if item.title == title:
+            return item
+    return None
+
+def generate_views():
+    item = random.choice(data)
+    views = random.randint(1, 100)
+    item.play(views)
+    #print(f'{item} - {views}')
+
+def generate_views_10():
+    for i in range(10):
+        generate_views()
+
+def top_titles(amount):
+    return sorted(data, key=lambda item: item.vievs, reverse=True)[:amount]
+
+
 
 movie1 = Movies('Forrest Gump', '1994', 'Drama', 10)
 movie2 = Movies('Predator', '1987', 'Action', 15)
@@ -46,18 +65,21 @@ series3 = Series(10, 9, 'Game of Thrones', '2007', 'Fantasy', 500,)
 
 data = [movie1, movie2, movie3, series1, series2, series3]
 
-movies_o = [item for item in data if type(item) == Movies]
-movies_sorted = sorted(movies_o, key=lambda movie: movie.title)
 
-series_o = [item for item in data if type(item) == Series]
-series_sorted = sorted(series_o, key=lambda serie: serie.title)
+#for movie in get_movies():
+    #print(movie)
 
+#for serie in get_series():
+    #print(serie)
 
+#print(search('Forrest Gump'))
 
-#get_movies()
-#get_series()
+#generate_views()
 
-print(movie1)
-print(series1)
+generate_views_10()
 
+for item in top_titles(3):
+    print(item, item.vievs)
 
+#print(movie1)
+#print(series1)
